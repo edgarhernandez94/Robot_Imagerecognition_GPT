@@ -1,12 +1,10 @@
 import base64
-import speech_recognition as sr
 from gtts import gTTS
 from io import BytesIO
 from pydub import AudioSegment
 from pydub.playback import play
-
-from imagewithvoice import capture_image_with_voice_command
-from analyzeimage import analyze_image
+from Functions.imagewithvoice import capture_image_with_voice_command
+from Functions.analyzeimage import analyze_image
 
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
@@ -21,9 +19,7 @@ def speak(text):
     fp.seek(0)
     audio = AudioSegment.from_file(fp)
     play(audio)
-
 def process_image_and_get_description(image_file):
-    """Procesa la imagen capturada y obtiene una descripción de la misma."""
     base64_image = encode_image(image_file)
     analysis_result = analyze_image(base64_image)
     print(analysis_result)
@@ -34,7 +30,7 @@ while True:
     if image_file is not None:
         try:
             description = process_image_and_get_description(image_file)
-            play_sound('./Maria/4602.mp3')
+            play_sound('./Assets/4602.mp3')
             speak(description)
         except Exception as e:
             print(f"Error al procesar la imagen: {e}")

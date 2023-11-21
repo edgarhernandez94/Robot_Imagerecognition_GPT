@@ -1,6 +1,6 @@
 import threading
 import cv2
-from voicerecognition import reconocer_comando_voz
+from Functions.voicerecognition import reconocer_comando_voz
 
 def capture_image_with_voice_command():
     stop_thread = threading.Event()

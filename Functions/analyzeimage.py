@@ -1,6 +1,6 @@
 import requests
 # OpenAI API Key
-api_key = "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"
+api_key = ""
 def analyze_image(base64_image):
     headers = {
         "Content-Type": "application/json",
