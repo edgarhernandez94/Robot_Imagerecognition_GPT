@@ -7,7 +7,6 @@ Robot Image Recognition with GPT is an innovative project combining the fields o
 
 ### Prerequisites
 - Python 3.x
-- [List any other prerequisites or dependencies here]
 
 ### Setup
 1. Clone the repository:
@@ -18,7 +17,8 @@ cd Robot_Imagerecognition_GPT
 pip install -r requirements.txt
 
 ## Usage
-[Provide instructions on how to use the software, including examples of commands or actions users can perform. This section should be updated with specific commands relevant to your project.]
+1. Need to add your API key on ./analyzeimage.py.
+2. Run main.py
 
 ## Contributing
 Contributions to the project are welcome. To contribute:
@@ -28,8 +28,6 @@ Contributions to the project are welcome. To contribute:
 4. Push to the branch (`git push origin feature_branch`).
 5. Create a new Pull Request.
 
-## License
-[Specify the license under which the project is released.]
 
 ## Contact
 For support, feedback, or queries, please reach out to [Your Contact Information].
