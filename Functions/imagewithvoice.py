@@ -1,7 +1,7 @@
 import threading
 import cv2
 from Functions.voicerecognition import reconocer_comando_voz
-
+import time
 def capture_image_with_voice_command():
     stop_thread = threading.Event()
     voice_thread = threading.Thread(target=reconocer_comando_voz, args=(stop_thread,))
@@ -18,7 +18,8 @@ def capture_image_with_voice_command():
         cv2.imshow("Di 'describe' para tomar foto", frame)
 
         if stop_thread.is_set():
-            img_name = "captured_photo.jpg"
+            timestamp = time.strftime("%Y%m%d-%H%M%S")
+            img_name = f"Photos/captured_photo_{timestamp}.jpg"
             cv2.imwrite(img_name, frame)
             print(f"Imagen capturada: {img_name}")
             break

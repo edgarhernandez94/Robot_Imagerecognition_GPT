@@ -5,6 +5,10 @@ from pydub import AudioSegment
 from pydub.playback import play
 from Functions.imagewithvoice import capture_image_with_voice_command
 from Functions.analyzeimage import analyze_image
+from reportlab.pdfgen import canvas
+import threading
+import os
+from reportlab.lib.pagesizes import letter
 
 def encode_image(image_path):
     with open(image_path, "rb") as image_file:
@@ -24,7 +28,18 @@ def process_image_and_get_description(image_file):
     analysis_result = analyze_image(base64_image)
     print(analysis_result)
     return analysis_result['choices'][0]['message']['content']
+def create_pdf(image_descriptions):
+    c = canvas.Canvas("Image_Descriptions.pdf", pagesize=letter)
+    width, height = letter
 
+    for image_path, description in image_descriptions:
+        # Asegúrate de que la imagen existe antes de intentar añadirla al PDF
+        if os.path.exists(image_path):
+            c.drawImage(image_path, 50, height - 550, width=400, preserveAspectRatio=True, mask='auto')
+            c.drawString(50, height - 570, description)
+            c.showPage()  # Crea una nueva página para la siguiente imagen y descripción
+
+    c.save()
 while True:
     image_file = capture_image_with_voice_command()
     if image_file is not None:
@@ -36,3 +51,5 @@ while True:
             print(f"Error al procesar la imagen: {e}")
     else:
         print("No se capturó ninguna imagen.")
+
+    create_pdf(description)
